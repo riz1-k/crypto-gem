@@ -16,7 +16,7 @@ import { AiOutlineFileSearch } from "react-icons/ai";
 import { CgRing } from "react-icons/cg";
 import { FaRecycle } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
-import { BsTools } from "react-icons/bs";
+import { BsDiamond, BsTools } from "react-icons/bs";
 import { Menu,Tab , Transition} from "@headlessui/react";
 
 function Home() {
@@ -123,7 +123,7 @@ function Home() {
       <div className=" grid grid-cols-sideBar">
         <nav className="text-[#9CFDFF] bg-[#242837] flex flex-col items-center text ">
           <div className="flex flex-col pt-8 pb-4">
-            <Diamond className="text-6xl py-2 " />
+            <BsDiamond className="text-6xl py-2 " />
             <p className="uppercase font-bold py-4 text-center text-white tracking-wider ">
               {" "}
               Crypto <br /> Gems
