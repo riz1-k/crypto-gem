@@ -383,7 +383,7 @@ function Home() {
                   Featured Sponsors
                 </h1>
                 {sponsers.map((s) => (
-                  <div className="flex flex-row py-4 ">
+                  <div key={s.title} className="flex flex-row py-4 ">
                     <img
                       className="h-10 w-10 rounded-full flex items-start mx-2 "
                       src={s.pfp}
