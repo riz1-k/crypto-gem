@@ -18,6 +18,31 @@ import { FaRecycle } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
 import { BsDiamond, BsTools } from "react-icons/bs";
 import { Menu,Tab , Transition} from "@headlessui/react";
+import { styled, useTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import MuiDrawer from "@mui/material/Drawer";
+import MuiAppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import List from "@mui/material/List";
+import CssBaseline from "@mui/material/CssBaseline";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+import FindInPageIcon from '@mui/icons-material/FindInPage';
+import FiberNewIcon from '@mui/icons-material/FiberNew';
+import SwapVerticalCircleIcon from '@mui/icons-material/SwapVerticalCircle';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import ConstructionIcon from '@mui/icons-material/Construction';
+
 
 function Home() {
   const cryptos = [
@@ -118,53 +143,132 @@ function Home() {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore .",
     },
   ];
+  const drawerWidth = 220;
+
+const openedMixin = (theme) => ({
+  width: drawerWidth,
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  overflowX: "hidden",
+});
+
+const closedMixin = (theme) => ({
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  overflowX: "hidden",
+  width: `calc(${theme.spacing(7)} + 1px)`,
+  [theme.breakpoints.up("sm")]: {
+    width: `calc(${theme.spacing(9)} + 1px)`,
+  },
+});
+
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+}));
+
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  width: drawerWidth,
+  flexShrink: 0,
+  whiteSpace: "nowrap",
+  boxSizing: "border-box",
+  ...(open && {
+    ...openedMixin(theme),
+    "& .MuiDrawer-paper": openedMixin(theme),
+  }),
+  ...(!open && {
+    ...closedMixin(theme),
+    "& .MuiDrawer-paper": closedMixin(theme),
+  }),
+}));
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
-      <div className=" grid grid-cols-sideBar">
-        <nav className="text-[#9CFDFF] bg-[#242837] flex flex-col items-center text ">
-          <div className="flex flex-col pt-8 pb-4">
-            <BsDiamond className="text-6xl py-2 " />
-            <p className="uppercase font-bold py-4 text-center text-white tracking-wider ">
-              {" "}
-              Crypto <br /> Gems
-            </p>
+      <div className="bg-[#242837] grid grid-cols-sideBar">
+  <Box className="bg-[#242837]" sx={{ display: "flex" }}>
+      <CssBaseline className="bg-[#242837]" />
+      <Drawer className="bg-[#242837]"  variant="permanent" open={open}>
+        <DrawerHeader  className="bg-[#242837]"  >
+          <IconButton onMouseLeave={handleDrawerClose} onMouseEnter={handleDrawerOpen}  >
+          <div className="flex justify-between items-center "  >
+            <h1 className="text-lg mr-4 text-[#9CFDFF] " >Crypto Gems</h1>
+          <BsDiamond className="text-5xl py-2 text-[#9CFDFF] " />
           </div>
-
-          <div className="flex flex-col py-3 cursor-pointer  items-center ">
-            <MdDashboard className="text-[2.2rem] py-2  " />
-            <p className="py-1 text-xs text-center font-sans  ">Dashboard</p>
-          </div>
-          <div className="flex flex-col py-3 cursor-pointer  items-center ">
-            <AiOutlineFileSearch className="text-[2.2rem] py-2  " />
-            <p className="py-1 text-xs text-center font-sans  ">Dex Explorer</p>
-          </div>
-          <div className="flex flex-col py-3 cursor-pointer  items-center ">
-            <CgRing className="text-[2.2rem] py-2  " />
-            <p className="py-1 text-xs text-center font-sans  ">
-              Pair Explorer
-            </p>
-          </div>
-          <div className="flex flex-col py-3 cursor-pointer  items-center ">
-            <GiMeshNetwork className="text-[2.2rem] py-2  " />
-            <p className="py-1 text-xs text-center font-sans  ">New Pairs</p>
-          </div>
-          <div className="flex flex-col py-3 cursor-pointer  items-center ">
-            <FaRecycle className="text-[2.2rem] py-2  " />
-            <p className="py-1 text-xs text-center font-sans  ">Big Swaps</p>
-          </div>
-          <div className="flex flex-col py-3 cursor-pointer  items-center ">
-            <ImProfile className="text-[2.2rem] py-2  " />
-            <p className="py-1 text-xs text-center font-sans  ">Portfolio</p>
-          </div>
-          <div className="flex flex-col py-4  items-center ">
-            <BsTools className="text-[2.2rem] py-2  " />
-            <p className="py-1 text-xs text-center font-mono  ">Tools</p>
-          </div>
-        </nav>
+          </IconButton>
+        </DrawerHeader>
+ 
+        <List className=" bg-[#242837]  " >
+          <ListItem button >
+            <ListItemIcon>  
+              <DashboardIcon className="text-[#9CFDFF] " />
+            </ListItemIcon>
+            <ListItemText className="text-[#9CFDFF] " primary="Dashboard" />
+          </ListItem>
+          <ListItem button >
+            <ListItemIcon>
+              <TravelExploreIcon className="text-[#9CFDFF] " />
+            </ListItemIcon>
+            <ListItemText className="text-[#9CFDFF] " primary="Dex Explorer" />
+          </ListItem>
+          <ListItem button >
+            <ListItemIcon>
+              <FindInPageIcon className="text-[#9CFDFF] " />
+            </ListItemIcon>
+            <ListItemText className="text-[#9CFDFF] " primary="Pair Explorer" />
+          </ListItem>
+          <ListItem button >
+            <ListItemIcon>
+              <FiberNewIcon className="text-[#9CFDFF] " />
+            </ListItemIcon>
+            <ListItemText className="text-[#9CFDFF] " primary="New Pairs" />
+          </ListItem>
+          <ListItem button >
+            <ListItemIcon>
+              <SwapVerticalCircleIcon className="text-[#9CFDFF] " />
+            </ListItemIcon>
+            <ListItemText className="text-[#9CFDFF] " primary="Big Swaps" />
+          </ListItem>
+          <Divider />
+          <ListItem button >
+            <ListItemIcon>
+              <AccountBalanceIcon className="text-[#9CFDFF] " />
+            </ListItemIcon>
+            <ListItemText className="text-[#9CFDFF] " primary="Portfolio" />
+          </ListItem>
+          <ListItem button >
+            <ListItemIcon>
+              <ConstructionIcon className="text-[#9CFDFF] " />
+            </ListItemIcon>
+            <ListItemText className="text-[#9CFDFF] " primary="Tools" />
+          </ListItem>
+        </List>
+      </Drawer>
+    </Box>
         <section>
           <section className="h-60 w-full">
             <div className="flex flex-col justify-center w-[95%] mx-auto ">
-              <div className=" flex justify-around h-14 border-b-2 border-[#246177]  ">
+                <marquee truespeed="100" className="border-b-2 border-[#246177] "  direction="left">
+              <div className=" flex justify-around h-14  ">
                 {cryptos.map((c) => {
                   return (
                     <div
@@ -177,6 +281,7 @@ function Home() {
                   );
                 })}
               </div>
+                </marquee>
               <div className="py-6">
                 <img
                   className="h-28 w-[50%] mx-auto rounded-xl flex justify-center items-center"
