@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         homepage : " 25% 75% ",
-        sideBar : " 7% 93% "
+        sideBar : " 4% 96% "
       }
     },
   },
