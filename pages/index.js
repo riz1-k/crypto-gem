@@ -217,7 +217,7 @@ const Drawer = styled(MuiDrawer, {
           </IconButton>
         </DrawerHeader>
  
-        <List className=" bg-[#242837]  " >
+        <List onMouseEnter={handleDrawerOpen} onMouseLeave={handleDrawerClose}  className=" bg-[#242837]  " >
           <ListItem button >
             <ListItemIcon>  
               <DashboardIcon className="text-[#9CFDFF] " />
